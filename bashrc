@@ -50,6 +50,9 @@ exists dircolors && eval "$(dircolors --bourne-shell)"
 # Completion
 [[ -f /etc/bash_completion ]] && . /etc/bash_completion
 
+# Editor
+exists emacs && export EDITOR="emacs -nw"
+
 # +------------------------------------------------------------------+
 # | Utils                                                            |
 # +------------------------------------------------------------------+
@@ -193,7 +196,6 @@ alias g='grep'
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
-alias ls='ls --color=auto -FC'
 alias la='ls -a'
 alias ll='ls -lh'
 alias lla='ls -lah'
@@ -201,6 +203,15 @@ alias l='ls -s'
 alias s='cd ..'
 alias du='du -h'
 alias df='df -h'
+
+case $(uname) in
+    Linux)
+	alias ls='ls --color=auto -FC'
+	;;
+    *)
+	alias ls='ls -FGC'
+	;;
+esac
 
 # +------------------------------------------------------------------+
 # | Welcome message                                                  |
