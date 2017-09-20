@@ -6,7 +6,7 @@
 # Licence   : BSD3
 
 # For non-interactive shells (like emacs).
-[[ -z $PS1 || $TERM == dumb ]] && return
+[[ "$-" != *i* ]] && return
 
 function exists
 {
