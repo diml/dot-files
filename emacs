@@ -1,3 +1,5 @@
+;; -*- emacs-lisp -*-
+
 ;; .emacs
 ;; ------
 ;; Copyright : (c) 2017, Jeremie Dimino <jeremie@dimino.org>
@@ -24,7 +26,9 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(merlin-command "ocamlmerlin")
- '(package-selected-packages (quote (company ocp-indent merlin pkgbuild-mode tuareg)))
+ '(package-selected-packages
+   (quote
+    (company ocp-indent merlin pkgbuild-mode tuareg)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
@@ -56,6 +60,13 @@
                (file-relative-name
                 (locate-dominating-file buffer-file-name "Makefile")
                 (file-name-directory buffer-file-name)))))
+
+;; Make company aware of merlin
+(with-eval-after-load 'company
+ (add-to-list 'company-backends 'merlin-company-backend))
+
+;; Enable company on merlin managed buffers
+(add-hook 'merlin-mode-hook 'company-mode)
 
 ;; +-----------------------------------------------------------------+
 ;; | Utils                                                           |
