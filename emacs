@@ -14,10 +14,6 @@
 (package-initialize)
 
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
  '(backup-directory-alist (quote (("." . "~/.backup"))))
  '(blink-cursor-mode nil)
  '(column-number-mode t)
@@ -35,12 +31,21 @@
  '(savehist-mode t)
  '(show-trailing-whitespace t))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:background "black" :foreground "grey" :height 110 :family "Consolas")))))
+(cond
+ ((memq system-type '(cygwin windows-nt))
+  (set-frame-font "Consolas-11"))
+ ((eq system-type 'darwin)
+  (custom-set-variables
+   '(tool-bar-mode nil)))
+ (t
+  (custom-set-variables
+   '(tool-bar-mode nil)
+   '(menu-bar-mode nil))))
+
+(when (display-graphic-p)
+  (set-foreground-color "grey")
+  (set-background-color "black")
+  (set-cursor-color "yellow"))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
