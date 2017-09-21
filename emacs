@@ -24,7 +24,7 @@
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
    (quote
-    (company ocp-indent merlin pkgbuild-mode tuareg)))
+    (cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
