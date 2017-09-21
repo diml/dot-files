@@ -48,7 +48,12 @@ exists lesspipe && eval "$(lesspipe)"
 exists dircolors && eval "$(dircolors --bourne-shell)"
 
 # Completion
-[[ -f /etc/bash_completion ]] && . /etc/bash_completion
+for dn in /etc /usr/local/etc; do
+    if [[ -f $dn/bash_completion ]]; then
+	. $dn/bash_completion
+	break
+    fi
+done
 
 # Editor
 exists emacs && export EDITOR="emacs -nw"
