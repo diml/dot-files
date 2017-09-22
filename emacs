@@ -14,12 +14,17 @@
 (package-initialize)
 
 (custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(backup-directory-alist (quote (("." . "~/.backup"))))
  '(blink-cursor-mode nil)
  '(column-number-mode t)
  '(compilation-scroll-output (quote first-error))
  '(global-hl-line-mode t)
  '(indent-tabs-mode nil)
+ '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
@@ -30,6 +35,13 @@
  '(save-abbrevs (quote silently))
  '(savehist-mode t)
  '(show-trailing-whitespace t))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (cond
  ((memq system-type '(cygwin windows-nt))
@@ -43,8 +55,8 @@
    '(menu-bar-mode nil))))
 
 (when (display-graphic-p)
-  (set-foreground-color "grey")
-  (set-background-color "black")
+  (set-foreground-color "#eeedf0")
+  (set-background-color "#012456")
   (set-cursor-color "yellow"))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
