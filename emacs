@@ -76,11 +76,16 @@
 
 (defun set-compile-command ()
   (interactive)
-  (set (make-local-variable 'compile-command)
-       (format "cd %s && make"
-               (file-relative-name
-                (locate-dominating-file buffer-file-name "Makefile")
-                (file-name-directory buffer-file-name)))))
+  (let* ((dir (locate-dominating-file buffer-file-name "Makefile")))
+    (print dir)
+    (when dir
+      (set (make-local-variable 'compile-command)
+	   (format "cd %s && make"
+		   (file-relative-name
+		    dir
+		    (file-name-directory buffer-file-name)))))))
+
+(add-hook 'tuareg-mode-hook 'set-compile-command)
 
 ;; Make company aware of merlin
 (with-eval-after-load 'company

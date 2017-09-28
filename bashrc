@@ -239,3 +239,5 @@ if exists fortune; then
     fortune -s 2> /dev/null
     echo
 fi
+
+exists opam && eval $(opam config env)
