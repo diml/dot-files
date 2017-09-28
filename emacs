@@ -54,10 +54,14 @@
    '(tool-bar-mode nil)
    '(menu-bar-mode nil))))
 
-(when (display-graphic-p)
-  (set-foreground-color "#eeedf0")
-  (set-background-color "#012456")
-  (set-cursor-color "yellow"))
+(if (display-graphic-p)
+    (progn
+      (set-foreground-color "#eeedf0")
+      (set-background-color "#012456")
+      (set-cursor-color "yellow"))
+  (setq frame-background-mode 'dark)
+  (custom-set-variables
+    '(menu-bar-mode nil)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
