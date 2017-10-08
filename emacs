@@ -48,7 +48,9 @@
   (set-frame-font "Consolas-11"))
  ((eq system-type 'darwin)
   (custom-set-variables
-   '(tool-bar-mode nil)))
+   '(tool-bar-mode nil))
+  ;; So that Right-Option-3 produces a #
+  (setq ns-right-alternate-modifier (quote none)))
  (t
   (custom-set-variables
    '(tool-bar-mode nil)
