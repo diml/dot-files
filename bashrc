@@ -173,6 +173,10 @@ function prompt_command
         status_color=${col[lred]}
     fi
 
+    if [[ "$STDREPLAY" = "recording" ]]; then
+        lc="${col[lred]}"
+    fi
+
     PS1="$TITLE\
 \[$lc$sm$line$rm\]( \[$lm\]\D{%H:%M:%S}\[$lc\] )\[$sm$line$rm\]< \[$ly\]$pwd\[$lc\] >\[$sm$line${long_line:${#pwd}+${#status}}$rm\][ \[$status_color\]$status\[$lc\] ]\[$sm$line$rm\]
 \[$lr\]${debian_chroot:+($debian_chroot)}\u\[$lg\]@\[$lb\]\h \[$lg\]\$ \[${col[reset]}\]"
