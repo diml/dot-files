@@ -65,6 +65,10 @@
   (custom-set-variables
     '(menu-bar-mode nil)))
 
+;; Currently, there are some glitches when using parenthesis matching
+;; with stdreplay, so we disable it when stdreplay is in use
+(when (getenv "STDREPLAY") (setq blink-matching-paren nil))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (global-set-key "\C-xt" 'delete-trailing-whitespace)
