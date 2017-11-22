@@ -1,8 +1,8 @@
 !! Emacs
 Emacs*menuBar:                  off
 Emacs*toolBar:                  off
-Emacs.background:               black
-Emacs.foreground:               #5fbf77
+Emacs.background:               #012456
+Emacs.foreground:               #eeedf0
 Emacs.cursorColor:              yellow
 Emacs*font:                     Monospace-10
 Emacs*verticalScrollBars:       off
@@ -27,6 +27,6 @@ URxvt.color12:                  #86cdea
 URxvt.color13:                  #cb96ce
 URxvt.color14:                  #71bebe
 URxvt.color15:                  #ffffff
-URxvt.foreground:               #5fbf77
-URxvt.background:               black
+URxvt.foreground:               #eeedf0
+URxvt.background:               #012456
 URxvt.cursorColor:              yellow
