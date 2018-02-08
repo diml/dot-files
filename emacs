@@ -43,6 +43,25 @@
  ;; If there is more than one, they won't work right.
  )
 
+(defun jane-street-dark-theme ()
+  "Dark theme imported from Jane Street elisp code"
+  (interactive)
+  (custom-set-faces
+   '(caml-types-expr-face ((t (:background "forest green"))))
+   '(font-lock-comment-face ((t (:foreground "green3"))))
+   '(font-lock-doc-face
+     ((t (:inherit font-lock-comment-face :foreground "pale goldenrod"))))
+   '(font-lock-function-name-face ((t (:foreground "LightSkyBlue" :weight semi-bold))))
+   '(help-argument-name ((t (:background "gray25"))))
+   '(mouse ((t (:background "purple"))))
+   '(tuareg-font-lock-governing-face
+     ((t (:inherit font-lock-keyword-face :foreground "orange" :weight bold))))
+   '(tuareg-font-lock-operator-face
+     ((t (:inherit font-lock-keyword-face :foreground "lightblue"))))
+   '(whitespace-trailing ((t (:background "pink" :weight bold))))))
+
+(jane-street-dark-theme)
+
 (cond
  ((memq system-type '(cygwin windows-nt))
   (set-frame-font "Consolas-11"))
