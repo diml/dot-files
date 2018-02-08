@@ -29,7 +29,7 @@
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
    (quote
-    (markdown-mode cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
+    (ack markdown-mode cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
@@ -83,13 +83,12 @@
 (defun set-compile-command ()
   (interactive)
   (let* ((dir (locate-dominating-file buffer-file-name "Makefile")))
-    (print dir)
     (when dir
       (set (make-local-variable 'compile-command)
-	   (format "cd %s && make"
-		   (file-relative-name
-		    dir
-		    (file-name-directory buffer-file-name)))))))
+           (format "cd %s && make"
+                   (file-relative-name
+                    dir
+                    (file-name-directory buffer-file-name)))))))
 
 (add-hook 'tuareg-mode-hook 'set-compile-command)
 
@@ -99,6 +98,10 @@
 
 ;; Enable company on merlin managed buffers
 (add-hook 'merlin-mode-hook 'company-mode)
+
+(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(global-whitespace-mode t)
 
 ;; +-----------------------------------------------------------------+
 ;; | Utils                                                           |
