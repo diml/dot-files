@@ -110,6 +110,7 @@
                     (file-name-directory buffer-file-name)))))))
 
 (add-hook 'tuareg-mode-hook 'set-compile-command)
+(add-hook 'tuareg-jbuild-mode-hook 'set-compile-command)
 
 ;; Make company aware of merlin
 (with-eval-after-load 'company
