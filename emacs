@@ -29,7 +29,14 @@
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
    (quote
-    (ack markdown-mode cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
+    (ack
+     markdown-mode
+     cygwin-mount
+     company
+     ocp-indent
+     merlin
+     pkgbuild-mode
+     tuareg)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
@@ -120,7 +127,7 @@
 (add-hook 'merlin-mode-hook 'company-mode)
 
 (require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
+(setq whitespace-style '(face tabs lines-tail trailing))
 (global-whitespace-mode t)
 
 ;; +-----------------------------------------------------------------+
