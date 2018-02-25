@@ -29,7 +29,9 @@
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
    (quote
-    (ack
+    (line-up-words
+     rg
+     ack
      markdown-mode
      cygwin-mount
      company
@@ -106,6 +108,8 @@
 (add-hook 'tuareg-mode-hook 'merlin-mode)
 (add-hook 'tuareg-mode-hook 'ocp-setup-indent)
 
+(global-set-key "\C-ca" 'line-up-words)
+
 (defun set-compile-command ()
   (interactive)
   (let* ((dir (locate-dominating-file buffer-file-name "Makefile")))
@@ -116,7 +120,7 @@
                     dir
                     (file-name-directory buffer-file-name)))))))
 
-(add-hook 'tuareg-mode-hook 'set-compile-command)
+(add-hook 'tuareg-mode-hook      'set-compile-command)
 (add-hook 'tuareg-dune-mode-hook 'set-compile-command)
 
 ;; Make company aware of merlin
