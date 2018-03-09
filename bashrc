@@ -244,4 +244,6 @@ if exists fortune; then
     echo
 fi
 
+[ -d ~/.local/bin ] && PATH=$HOME/.local/bin:$PATH
+
 exists opam && eval $(opam config env)
