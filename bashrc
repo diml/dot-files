@@ -245,5 +245,12 @@ if exists fortune; then
 fi
 
 [ -d ~/.local/bin ] && PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/bin:$PATH
 
-exists opam && eval $(opam config env)
+if [[ -n "$OPAMROOT" ]]; then
+    opaminit="$OPAMROOT/opam-init/init.sh"
+else
+    opaminit="$HOME/.opam/opam-init/init.sh"
+fi
+[[ -f "$opaminit" ]] && source "$opaminit"
+unset opaminit
