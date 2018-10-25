@@ -26,31 +26,32 @@
  '(indent-tabs-mode nil)
  '(indicate-empty-lines t)
  '(inhibit-startup-screen t)
+ '(menu-bar-mode nil)
  '(merlin-command "ocamlmerlin")
  '(package-selected-packages
    (quote
-    (line-up-words
-     rg
-     ack
-     markdown-mode
-     cygwin-mount
-     company
-     ocp-indent
-     merlin
-     pkgbuild-mode
-     tuareg)))
+    (utop line-up-words rg ack markdown-mode cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
  '(savehist-mode t)
- '(show-trailing-whitespace t))
+ '(show-trailing-whitespace t)
+ '(tool-bar-mode nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(caml-types-expr-face ((t (:background "forest green"))) t)
+ '(font-lock-comment-face ((t (:foreground "green3"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-comment-face :foreground "pale goldenrod"))))
+ '(font-lock-function-name-face ((t (:foreground "LightSkyBlue" :weight semi-bold))))
+ '(help-argument-name ((t (:background "gray25"))))
+ '(mouse ((t (:background "purple"))))
+ '(tuareg-font-lock-governing-face ((t (:inherit font-lock-keyword-face :foreground "orange" :weight bold))))
+ '(tuareg-font-lock-operator-face ((t (:inherit font-lock-keyword-face :foreground "lightblue"))))
+ '(whitespace-trailing ((t (:background "pink" :weight bold)))))
 
 (defun jane-street-dark-theme ()
   "Dark theme imported from Jane Street elisp code"
@@ -186,6 +187,21 @@
             "+-------------------------------------------------------------------+\n")))
   (previous-line 2)
   (forward-char 5))
+
+;; +-----------------------------------------------------------------+
+;; | OCaml stuff                                                     |
+;; +-----------------------------------------------------------------+
+
+(let ((prefix (getenv "OPAM_SWITCH_PREFIX")))
+  (when prefix
+    (add-to-list 'load-path (concat prefix "/share/emacs/site-lisp"))))
+
+(require 'ocamlformat)
+
+(add-hook 'tuareg-mode-hook
+          (lambda ()
+            (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+            (add-hook 'before-save-hook 'ocamlformat-before-save)))
 
 ;; +-----------------------------------------------------------------+
 ;; | Local customization                                             |
