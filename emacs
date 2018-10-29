@@ -198,10 +198,11 @@
 
 (require 'ocamlformat)
 
-(add-hook 'tuareg-mode-hook
-          (lambda ()
-            (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
-            (add-hook 'before-save-hook 'ocamlformat-before-save)))
+(defun enable-ocamlformat ()
+  (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+  (add-hook 'before-save-hook 'ocamlformat-before-save))
+
+(add-hook 'tuareg-mode-hook 'enable-ocamlformat)
 
 ;; +-----------------------------------------------------------------+
 ;; | Local customization                                             |
