@@ -7,7 +7,6 @@
 set $mod Mod4
 
 exec --no-startup-id exec xset r rate 262 57
-exec --no-startup-id exec synapse -s
 exec --no-startup-id exec odrive-unofficial
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -39,7 +38,7 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id synapse
 
 # change focus
 bindsym $mod+j focus left
