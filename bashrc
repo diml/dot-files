@@ -244,7 +244,9 @@ if exists fortune; then
     echo
 fi
 
-[ -d ~/.local/bin ] && PATH=$HOME/.local/bin:$PATH
+for d in .local .node_modules; do
+    [ -d ~/$d/bin ] && PATH=$HOME/$d/bin:$PATH
+done
 PATH=$HOME/bin:$PATH
 
 if [[ -n "$OPAMROOT" ]]; then
