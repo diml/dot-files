@@ -28,9 +28,10 @@
  '(inhibit-startup-screen t)
  '(menu-bar-mode nil)
  '(merlin-command "ocamlmerlin")
+ '(ocamlformat-enable (quote disable-outside-detected-project))
  '(package-selected-packages
    (quote
-    (utop line-up-words rg ack markdown-mode cygwin-mount company ocp-indent merlin pkgbuild-mode tuareg)))
+    (utop rg ack markdown-mode cygwin-mount company)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
@@ -43,7 +44,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(caml-types-expr-face ((t (:background "forest green"))) t)
+ '(caml-types-expr-face ((t (:background "forest green"))))
  '(font-lock-comment-face ((t (:foreground "green3"))))
  '(font-lock-doc-face ((t (:inherit font-lock-comment-face :foreground "pale goldenrod"))))
  '(font-lock-function-name-face ((t (:foreground "LightSkyBlue" :weight semi-bold))))
@@ -106,10 +107,22 @@
 ;; | Dev                                                             |
 ;; +-----------------------------------------------------------------+
 
-(add-hook 'tuareg-mode-hook 'merlin-mode)
-(add-hook 'tuareg-mode-hook 'ocp-setup-indent)
+;; Get emacs stuff from opam
+(let ((prefix (getenv "OPAM_SWITCH_PREFIX")))
+  (when prefix
+    (add-to-list 'load-path (concat prefix "/share/emacs/site-lisp"))))
 
+(require 'line-up-words nil t)
 (global-set-key "\C-ca" 'line-up-words)
+
+(require 'tuareg nil t)
+(require 'dune nil t)
+(require 'merlin nil t)
+(require 'ocp-indent  nil t)
+(require 'ocamlformat nil t)
+
+(add-hook 'tuareg-mode-hook 'merlin-mode)
+(add-hook 'tuareg-mode-hook 'company-mode)
 
 (defun set-compile-command ()
   (interactive)
@@ -121,15 +134,18 @@
                     dir
                     (file-name-directory buffer-file-name)))))))
 
-(add-hook 'tuareg-mode-hook      'set-compile-command)
-(add-hook 'tuareg-dune-mode-hook 'set-compile-command)
+(defun my-tuareg-mode-hook ()
+  (set-compile-command)
 
-;; Make company aware of merlin
-(with-eval-after-load 'company
- (add-to-list 'company-backends 'merlin-company-backend))
+  ;; ocamlformat stuff
+  (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+  (add-hook 'before-save-hook 'ocamlformat-before-save)
 
-;; Enable company on merlin managed buffers
-(add-hook 'merlin-mode-hook 'company-mode)
+  ;; company stuff
+  (define-key merlin-mode-map (kbd "M-.") 'company-complete))
+
+(add-hook 'tuareg-mode-hook 'my-tuareg-mode-hook)
+(add-hook 'dune-mode-hook   'set-compile-command)
 
 (require 'whitespace)
 (setq whitespace-style '(face tabs lines-tail trailing))
@@ -187,22 +203,6 @@
             "+-------------------------------------------------------------------+\n")))
   (previous-line 2)
   (forward-char 5))
-
-;; +-----------------------------------------------------------------+
-;; | OCaml stuff                                                     |
-;; +-----------------------------------------------------------------+
-
-(let ((prefix (getenv "OPAM_SWITCH_PREFIX")))
-  (when prefix
-    (add-to-list 'load-path (concat prefix "/share/emacs/site-lisp"))))
-
-(require 'ocamlformat)
-
-(defun enable-ocamlformat ()
-  (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
-  (add-hook 'before-save-hook 'ocamlformat-before-save))
-
-(add-hook 'tuareg-mode-hook 'enable-ocamlformat)
 
 ;; +-----------------------------------------------------------------+
 ;; | Local customization                                             |
