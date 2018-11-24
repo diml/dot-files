@@ -30,3 +30,11 @@ URxvt.color15:                  #ffffff
 URxvt.foreground:               #eeedf0
 URxvt.background:               #012456
 URxvt.cursorColor:              yellow
+
+!! Look
+Xft.antialias:  1
+Xft.hinting:    1
+Xft.hintstyle:  hintslight
+Xft.rgba:       rgb
+
+#include ".Xresources.local"
