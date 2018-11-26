@@ -138,7 +138,7 @@
   (set-compile-command)
 
   ;; ocamlformat stuff
-  (define-key merlin-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+  (define-key tuareg-mode-map (kbd "C-M-<tab>") 'ocamlformat)
   (add-hook 'before-save-hook 'ocamlformat-before-save)
 
   ;; company stuff
