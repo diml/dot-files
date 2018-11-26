@@ -104,54 +104,6 @@
 (global-set-key "\C-xt" 'delete-trailing-whitespace)
 
 ;; +-----------------------------------------------------------------+
-;; | Dev                                                             |
-;; +-----------------------------------------------------------------+
-
-;; Get emacs stuff from opam
-(let ((prefix (getenv "OPAM_SWITCH_PREFIX")))
-  (when prefix
-    (add-to-list 'load-path (concat prefix "/share/emacs/site-lisp"))))
-
-(require 'line-up-words nil t)
-(global-set-key "\C-ca" 'line-up-words)
-
-(require 'tuareg nil t)
-(require 'dune nil t)
-(require 'merlin nil t)
-(require 'ocp-indent  nil t)
-(require 'ocamlformat nil t)
-
-(add-hook 'tuareg-mode-hook 'merlin-mode)
-(add-hook 'tuareg-mode-hook 'company-mode)
-
-(defun set-compile-command ()
-  (interactive)
-  (let* ((dir (locate-dominating-file buffer-file-name "Makefile")))
-    (when dir
-      (set (make-local-variable 'compile-command)
-           (format "cd %s && make"
-                   (file-relative-name
-                    dir
-                    (file-name-directory buffer-file-name)))))))
-
-(defun my-tuareg-mode-hook ()
-  (set-compile-command)
-
-  ;; ocamlformat stuff
-  (define-key tuareg-mode-map (kbd "C-M-<tab>") 'ocamlformat)
-  (add-hook 'before-save-hook 'ocamlformat-before-save)
-
-  ;; company stuff
-  (define-key merlin-mode-map (kbd "M-.") 'company-complete))
-
-(add-hook 'tuareg-mode-hook 'my-tuareg-mode-hook)
-(add-hook 'dune-mode-hook   'set-compile-command)
-
-(require 'whitespace)
-(setq whitespace-style '(face tabs lines-tail trailing))
-(global-whitespace-mode t)
-
-;; +-----------------------------------------------------------------+
 ;; | Utils                                                           |
 ;; +-----------------------------------------------------------------+
 
@@ -208,5 +160,57 @@
 ;; | Local customization                                             |
 ;; +-----------------------------------------------------------------+
 
+;; To disable my own customization when using a work environment
+(setq disable-my-dev-setup nil)
+
 (when (file-exists-p "~/site-lisp/init.el")
   (load-file "~/site-lisp/init.el"))
+
+;; +-----------------------------------------------------------------+
+;; | Dev                                                             |
+;; +-----------------------------------------------------------------+
+
+(unless disable-my-dev-setup
+  ;; Get emacs stuff from opam
+  (let ((prefix (getenv "OPAM_SWITCH_PREFIX")))
+    (when prefix
+      (add-to-list 'load-path (concat prefix "/share/emacs/site-lisp"))))
+
+  (require 'line-up-words nil t)
+  (global-set-key "\C-ca" 'line-up-words)
+
+  (load "tuareg-site-file" t)
+  (require 'dune nil t)
+  (require 'merlin nil t)
+  (require 'ocp-indent  nil t)
+  (require 'ocamlformat nil t)
+
+  (add-hook 'tuareg-mode-hook 'merlin-mode)
+  (add-hook 'tuareg-mode-hook 'company-mode)
+
+  (defun set-compile-command ()
+    (interactive)
+    (let* ((dir (locate-dominating-file buffer-file-name "Makefile")))
+      (when dir
+        (set (make-local-variable 'compile-command)
+             (format "cd %s && make"
+                     (file-relative-name
+                      dir
+                      (file-name-directory buffer-file-name)))))))
+
+  (defun my-tuareg-mode-hook ()
+    (set-compile-command)
+
+    ;; ocamlformat stuff
+    (define-key tuareg-mode-map (kbd "C-M-<tab>") 'ocamlformat)
+    (add-hook 'before-save-hook 'ocamlformat-before-save)
+
+    ;; company stuff
+    (define-key merlin-mode-map (kbd "M-.") 'company-complete))
+
+  (add-hook 'tuareg-mode-hook 'my-tuareg-mode-hook)
+  (add-hook 'dune-mode-hook   'set-compile-command)
+
+  (require 'whitespace)
+  (setq whitespace-style '(face tabs lines-tail trailing))
+  (global-whitespace-mode t))
