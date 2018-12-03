@@ -8,6 +8,10 @@
 # For non-interactive shells (like emacs).
 [[ "$-" != *i* ]] && return
 
+# Local customization. This file can define a function bashrc-final
+# that is executed at the end of this script.
+[[ -f .bashrc.local ]] && . .bashrc.local
+
 function exists
 {
     command -v "$1" &> /dev/null
@@ -256,3 +260,8 @@ else
 fi
 [[ -f "$opaminit" ]] && source "$opaminit"
 unset opaminit
+
+if command -v bashrc-final; then
+    bashrc-final
+    unset bashrc-final
+fi
