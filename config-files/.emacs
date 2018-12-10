@@ -185,6 +185,8 @@
   (require 'ocp-indent  nil t)
   (require 'ocamlformat nil t)
 
+  (global-set-key "\C-c\C-a" 'dune-promote)
+
   (add-hook 'tuareg-mode-hook 'merlin-mode)
   (add-hook 'tuareg-mode-hook 'company-mode)
 
