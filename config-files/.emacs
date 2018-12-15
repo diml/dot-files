@@ -156,6 +156,17 @@
   (previous-line 2)
   (forward-char 5))
 
+(defun remove-newlines-in-region ()
+  "Removes all newlines in the region."
+  (interactive)
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (goto-char (point-min))
+    (while (search-forward-regexp "\n[^\n]" nil t)
+      (goto-char (- (point) 1))
+      (delete-char -1)
+      (insert " "))))
+
 ;; +-----------------------------------------------------------------+
 ;; | Local customization                                             |
 ;; +-----------------------------------------------------------------+
