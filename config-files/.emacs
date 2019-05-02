@@ -31,7 +31,7 @@
  '(ocamlformat-enable (quote disable-outside-detected-project))
  '(package-selected-packages
    (quote
-    (utop rg ack markdown-mode cygwin-mount company)))
+    (merlin ocp-indent tuareg utop rg ack markdown-mode cygwin-mount company)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
@@ -195,6 +195,8 @@
   (require 'merlin nil t)
   (require 'ocp-indent  nil t)
   (require 'ocamlformat nil t)
+
+  (add-to-list 'auto-mode-alist '("\\.mlt\\'" . tuareg-mode))
 
   (global-set-key "\C-c\C-a" 'dune-promote)
 
