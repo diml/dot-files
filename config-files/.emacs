@@ -31,7 +31,7 @@
  '(ocamlformat-enable (quote disable-outside-detected-project))
  '(package-selected-packages
    (quote
-    (merlin ocp-indent tuareg utop rg ack markdown-mode cygwin-mount company)))
+    (haskell-mode merlin ocp-indent tuareg utop rg ack markdown-mode cygwin-mount company)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
