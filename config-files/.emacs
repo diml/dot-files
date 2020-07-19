@@ -231,3 +231,7 @@
   (require 'whitespace)
   (setq whitespace-style '(face tabs lines-tail trailing))
   (global-whitespace-mode t))
+
+(defun date ()
+  (interactive)
+  (insert (format-time-string "%Y-%m-%d")))
