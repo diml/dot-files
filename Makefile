@@ -21,4 +21,4 @@ install-regolith:
 
 add-ppa: add-ppa-alacritty add-ppa-regolith
 
-install: install-alacritty install-regolith
+install-packages: install-alacritty install-regolith
