@@ -1,0 +1,10 @@
+background_opacity: 0.9
+colors:
+  primary:
+    background: '#012456'
+  cursor:
+    cursor: '#F7F700'
+
+key_bindings:
+  - { key: V, mods: Control|Alt, action: Paste }
+  - { key: C, mods: Control|Alt, action: Copy }
