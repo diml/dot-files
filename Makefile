@@ -1,5 +1,24 @@
 install:
 	./install.sh
 
-install-packages:
-	sudo apt install i3 notify-osd session-shortcuts
+add-ppa-alacritty:
+	sudo add-apt-repository ppa:mmstick76/alacritty
+
+install-alacritty:
+	sudo apt install alacritty
+
+add-ppa-regolith:
+	sudo add-apt-repository ppa:regolith-linux/release
+
+install-regolith:
+	sudo apt install regolith-desktop \
+	  i3xrocks-net-traffic \
+	  i3xrocks-cpu-usage \
+	  i3xrocks-time \
+	  i3xrocks-time \
+	  i3xrocks-volume \
+	  i3xrocks-battery
+
+add-ppa: add-ppa-alacritty add-ppa-regolith
+
+install: install-alacritty install-regolith
