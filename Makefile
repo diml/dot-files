@@ -12,9 +12,6 @@ add-ppa-regolith:
 
 install-regolith:
 	sudo apt install regolith-desktop \
-	  i3xrocks-net-traffic \
-	  i3xrocks-cpu-usage \
-	  i3xrocks-time \
 	  i3xrocks-time \
 	  i3xrocks-volume \
 	  i3xrocks-battery
