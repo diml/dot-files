@@ -2,3 +2,6 @@ i3-wm.gaps.focus_follows_mouse: yes
 
 ! System tray
 i3-wm.bar.trayoutput: primary
+
+i3-wm.font: pango:JetBrains Mono Medium 11
+gnome.wallpaper: /home/dim/.wallpaper
