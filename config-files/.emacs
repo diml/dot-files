@@ -33,7 +33,7 @@
  '(ocamlformat-show-errors (quote echo))
  '(package-selected-packages
    (quote
-    (yaml-mode edit-server haskell-mode merlin ocp-indent tuareg utop rg ack markdown-mode cygwin-mount company)))
+    (rust-mode yaml-mode edit-server haskell-mode merlin ocp-indent tuareg utop rg ack markdown-mode cygwin-mount company)))
  '(ring-bell-function (quote ignore))
  '(safe-local-variable-values (quote ((eval set-compile-command))))
  '(save-abbrevs (quote silently))
