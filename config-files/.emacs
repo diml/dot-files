@@ -39,6 +39,7 @@
  '(save-abbrevs (quote silently))
  '(savehist-mode t)
  '(show-trailing-whitespace t)
+ '(split-width-threshold 300)
  '(tool-bar-mode nil))
 
 (custom-set-faces
